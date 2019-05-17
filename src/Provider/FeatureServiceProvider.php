@@ -22,9 +22,7 @@ class FeatureServiceProvider extends ServiceProvider
             __DIR__.'/../Config/features.php' => config_path('features.php'),
         ]);
 
-
         $this->registerBladeDirectives();
-        $this->registerConsoleCommand();
     }
 
     /**
@@ -41,6 +39,8 @@ class FeatureServiceProvider extends ServiceProvider
         $this->app->bind(FeatureRepositoryInterface::class, function () use ($config) {
             return app()->make($config->get('features.repository'));
         });
+
+        $this->registerConsoleCommand();
     }
 
     private function registerBladeDirectives()
